@@ -22,4 +22,27 @@ public class ProyectoFinal {
     return false;
 }
 
+    // Función para generar factura
+    public static String generarFactura(String[][] nombres, int[][] precios, int[][] cantidades) {
+        String factura = "----- FACTURA -----\n";
+
+        int total = 0;
+
+        // Ciclo anidado (matriz)
+        for (int i = 0; i < nombres.length; i++) {
+            for (int j = 0; j < nombres[i].length; j++) {
+                if (cantidades[i][j] > 0) {
+                    int subtotal = precios[i][j] * cantidades[i][j];
+                    factura += nombres[i][j] + " x" + cantidades[i][j] + " = $" + subtotal + "\n";
+                    total += subtotal;
+                }
+            }
+        }
+
+        factura += "-------------------\n";
+        factura += "TOTAL: $" + total;
+
+        return factura;
+    }
+
 }
