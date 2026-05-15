@@ -1,5 +1,7 @@
 package proyectofinal;
 
+import javax.swing.JOptionPane;
+
 public class ProyectoFinal {
 
     // Función para calcular subtotal
@@ -12,15 +14,15 @@ public class ProyectoFinal {
     }
 
     public static boolean hayPedido(int[][] cantidades) {
-    for (int i = 0; i < cantidades.length; i++) {
-        for (int j = 0; j < cantidades[i].length; j++) {
-            if (cantidades[i][j] > 0) {
-                return true;
+        for (int i = 0; i < cantidades.length; i++) {
+            for (int j = 0; j < cantidades[i].length; j++) {
+                if (cantidades[i][j] > 0) {
+                    return true;
+                }
             }
         }
+        return false;
     }
-    return false;
-}
 
     // Función para generar factura
     public static String generarFactura(String[][] nombres, int[][] precios, int[][] cantidades) {
@@ -45,4 +47,61 @@ public class ProyectoFinal {
         return factura;
     }
 
+    // Commit 3: Creación manualamente e ingreso de los datos en las matrices,
+    // selección de tipo de usuario y validación de clave para administrador
+    public static void main(String[] args) {
+
+        // MATRICES - Categorías: Hamburguesas, Perros, Perras, Papas, Adicionales,
+        // Bebidas
+        String[][] nombres = {
+                { "Hamburguesa Sencilla", "Hamburguesa Especial", "Hamburguesa de la Casa" },
+                { "Perro Sencillo", "Perro Especial", "Super Dog" },
+                { "Perra Sencilla", "Perra Especial", "Super Doggy" },
+                { "Papas a la francesa" },
+                { "Queso", "Tocineta", "Ensalada" },
+                { "Gaseosa Personal", "Gaseosa Familiar", "Limonada", "Té", "Jugos" }
+        };
+
+        int[][] precios = {
+                { 14000, 18000, 21000 },
+                { 11000, 13000, 15000 },
+                { 12000, 14000, 16000 },
+                { 7000 },
+                { 5000, 5000, 5000 },
+                { 5000, 10000, 8000, 6000, 6000 }
+        };
+
+        int[][] cantidades = new int[6][];
+        for (int i = 0; i < nombres.length; i++) {
+            cantidades[i] = new int[nombres[i].length];
+        }
+
+        int tipoUsuario;
+
+        do {
+            try {
+                tipoUsuario = Integer.parseInt(JOptionPane.showInputDialog("""
+                        Seleccione tipo de usuario:
+                        1. Administrador
+                        2. Cliente
+                        """));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese una opción válida");
+                tipoUsuario = -1;
+            }
+        } while (tipoUsuario != 1 && tipoUsuario != 2);
+
+        boolean esAdmin = false;
+
+        if (tipoUsuario == 1) {
+            String clave = JOptionPane.showInputDialog("Ingrese clave de administrador:");
+
+            if (clave.equals("1234")) {
+                esAdmin = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Clave incorrecta. Entrando como cliente.");
+            }
+        }
+
+    }
 }
