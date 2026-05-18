@@ -102,6 +102,110 @@ public class ProyectoFinal {
                 JOptionPane.showMessageDialog(null, "Clave incorrecta. Entrando como cliente.");
             }
         }
+        int opcion;
 
+do {
+
+    String menu = """
+            --- MENU ---
+
+            1. Hamburguesas
+            2. Perros
+            3. Perras
+            4. Papas
+            5. Adiciones
+            6. Bebidas
+            0. Finalizar
+            """;
+
+    try {
+
+        opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+
+    } catch (Exception e) {
+
+        JOptionPane.showMessageDialog(null, "Debes ingresar un número válido");
+        opcion = -1; // para que el ciclo continúe
+        continue;
+    }
+
+    switch (opcion) {
+
+        case 1, 2, 3, 4, 5, 6 -> {
+
+            int categoria = opcion - 1;
+
+            if (esAdmin == true) {
+
+                int opcionAdmin;
+
+                do {
+
+                    try {
+
+                        opcionAdmin = Integer.parseInt(
+                                JOptionPane.showInputDialog("""
+                                ADMIN:
+                                1. Agregar producto
+                                2. Continuar
+                                """));
+
+                    } catch (Exception e) {
+
+                        JOptionPane.showMessageDialog(null, "Debes ingresar un número válido");
+                        opcionAdmin = -1;
+                        continue;
+                    }
+
+                    if (opcionAdmin != 1 && opcionAdmin != 2) {
+
+                        JOptionPane.showMessageDialog(null, "Opción inválida");
+                    }
+
+                } while (opcionAdmin != 1 && opcionAdmin != 2);
+
+                if (opcionAdmin == 1) {
+
+                    String nuevo = JOptionPane.showInputDialog(
+                            "Nombre del nuevo producto:");
+
+                    int precioNuevo;
+
+                    try {
+
+                        precioNuevo = Integer.parseInt(
+                                JOptionPane.showInputDialog("Precio:"));
+
+                    } catch (Exception e) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Precio inválido"
+                        );
+
+                        break;
+                    }
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Producto agregado:\n" +
+                            nuevo + " - $" + precioNuevo
+                    );
+                }
+            }
+        }
+
+        case 0 -> JOptionPane.showMessageDialog(
+                null,
+                "Pedido finalizado"
+        );
+
+        default -> JOptionPane.showMessageDialog(
+                null,
+                "Opción inválida"
+        );
+    }
+
+} while (opcion != 0);
     }
 }
