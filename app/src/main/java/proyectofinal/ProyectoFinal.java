@@ -259,5 +259,12 @@ do {
             }
 
         } while (opcion != 0);
+          // Commit 6:Mostrar factura final
+        if (hayPedido(cantidades)) {
+        String factura = generarFactura(nombres, precios, cantidades);
+        JOptionPane.showMessageDialog(null, factura);
+        } else {
+            JOptionPane.showMessageDialog(null, "No realizaste ningún pedido. ¡Gracias por visitarnos!");
+        }
     }
 }
