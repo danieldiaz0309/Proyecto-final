@@ -102,6 +102,7 @@ public class ProyectoFinal {
                 JOptionPane.showMessageDialog(null, "Clave incorrecta. Entrando como cliente.");
             }
         }
+        //Commit 4
         int opcion;
 
 do {
@@ -207,5 +208,56 @@ do {
     }
 
 } while (opcion != 0);
+        //Commit 5
+        String subMenu = "Seleccione:\n";
+
+                    for (int i = 0; i < nombres[categoria].length; i++) {
+                        subMenu += (i + 1) + ". " + nombres[categoria][i] + " $" + precios[categoria][i] + "\n";
+                    }
+                    subMenu += "0. Volver al menú principal\n";
+
+                    int opcionSub = -1;
+                    do { 
+                        try {
+                        opcionSub = Integer.parseInt(JOptionPane.showInputDialog(subMenu));
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Opción inválida");
+                        continue;
+                    }
+
+                    if (opcionSub == 0) {
+                        continue;
+                    }
+
+                    int eleccion = opcionSub -1;
+                    if (eleccion >= 0 && eleccion < nombres[categoria].length) {
+
+                        int cantidad;
+                        try {
+                            cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad:"));
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Cantidad inválida");
+                            continue;
+                        }
+
+                        if (cantidad > 0) {
+                            cantidades[categoria][eleccion] += cantidad;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Cantidad inválida");
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Opción inválida");
+                    }
+                    
+                } while (opcionSub != 0);
+                }
+
+                case 0 -> JOptionPane.showMessageDialog(null, "Generando factura...");
+
+                default -> JOptionPane.showMessageDialog(null, "Opción incorrecta");
+            }
+
+        } while (opcion != 0);
     }
 }
